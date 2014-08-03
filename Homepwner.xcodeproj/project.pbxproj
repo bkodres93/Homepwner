@@ -19,6 +19,12 @@
 		5026235B1947CDAB0044503B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 502623431947CDAA0044503B /* UIKit.framework */; };
 		502623631947CDAB0044503B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 502623611947CDAB0044503B /* InfoPlist.strings */; };
 		502623651947CDAB0044503B /* HomepwnerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 502623641947CDAB0044503B /* HomepwnerTests.m */; };
+		502623701947CEB60044503B /* BNRItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5026236F1947CEB60044503B /* BNRItemsViewController.m */; };
+		502623731947D2300044503B /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 502623721947D2300044503B /* BNRItem.m */; };
+		502623761947D2A90044503B /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 502623751947D2A90044503B /* BNRItemStore.m */; };
+		5057B53219623D4E002E1885 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5057B53119623D4E002E1885 /* HeaderView.xib */; };
+		50E620DB198B4B330072F083 /* BNRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E620D9198B4B330072F083 /* BNRDetailViewController.m */; };
+		50E620DC198B4B330072F083 /* BNRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E620DA198B4B330072F083 /* BNRDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +54,16 @@
 		502623601947CDAB0044503B /* HomepwnerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HomepwnerTests-Info.plist"; sourceTree = "<group>"; };
 		502623621947CDAB0044503B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		502623641947CDAB0044503B /* HomepwnerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepwnerTests.m; sourceTree = "<group>"; };
+		5026236E1947CEB60044503B /* BNRItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemsViewController.h; sourceTree = "<group>"; };
+		5026236F1947CEB60044503B /* BNRItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemsViewController.m; sourceTree = "<group>"; };
+		502623711947D2300044503B /* BNRItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItem.h; sourceTree = "<group>"; };
+		502623721947D2300044503B /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
+		502623741947D2A90044503B /* BNRItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemStore.h; sourceTree = "<group>"; };
+		502623751947D2A90044503B /* BNRItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemStore.m; sourceTree = "<group>"; };
+		5057B53119623D4E002E1885 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		50E620D8198B4B330072F083 /* BNRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDetailViewController.h; sourceTree = "<group>"; };
+		50E620D9198B4B330072F083 /* BNRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDetailViewController.m; sourceTree = "<group>"; };
+		50E620DA198B4B330072F083 /* BNRDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BNRDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +93,16 @@
 		502623331947CDAA0044503B = {
 			isa = PBXGroup;
 			children = (
+				502623711947D2300044503B /* BNRItem.h */,
+				502623721947D2300044503B /* BNRItem.m */,
+				502623741947D2A90044503B /* BNRItemStore.h */,
+				502623751947D2A90044503B /* BNRItemStore.m */,
+				5026236E1947CEB60044503B /* BNRItemsViewController.h */,
+				5026236F1947CEB60044503B /* BNRItemsViewController.m */,
+				5057B53119623D4E002E1885 /* HeaderView.xib */,
+				50E620D8198B4B330072F083 /* BNRDetailViewController.h */,
+				50E620D9198B4B330072F083 /* BNRDetailViewController.m */,
+				50E620DA198B4B330072F083 /* BNRDetailViewController.xib */,
 				502623451947CDAA0044503B /* Homepwner */,
 				5026235E1947CDAB0044503B /* HomepwnerTests */,
 				5026233E1947CDAA0044503B /* Frameworks */,
@@ -220,6 +246,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50E620DC198B4B330072F083 /* BNRDetailViewController.xib in Resources */,
+				5057B53219623D4E002E1885 /* HeaderView.xib in Resources */,
 				5026234A1947CDAA0044503B /* InfoPlist.strings in Resources */,
 				502623521947CDAA0044503B /* Images.xcassets in Resources */,
 			);
@@ -240,6 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50E620DB198B4B330072F083 /* BNRDetailViewController.m in Sources */,
+				502623761947D2A90044503B /* BNRItemStore.m in Sources */,
+				502623701947CEB60044503B /* BNRItemsViewController.m in Sources */,
+				502623731947D2300044503B /* BNRItem.m in Sources */,
 				5026234C1947CDAA0044503B /* main.m in Sources */,
 				502623501947CDAA0044503B /* BNRAppDelegate.m in Sources */,
 			);
@@ -438,6 +470,7 @@
 				5026236A1947CDAB0044503B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5026236B1947CDAB0044503B /* Build configuration list for PBXNativeTarget "HomepwnerTests" */ = {
 			isa = XCConfigurationList;
@@ -446,6 +479,7 @@
 				5026236D1947CDAB0044503B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
