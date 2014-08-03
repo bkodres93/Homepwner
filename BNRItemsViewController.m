@@ -13,8 +13,6 @@
 
 @interface BNRItemsViewController ()
 
-@property (nonatomic, strong) IBOutlet UIView *headerView;
-
 @end
 
 @implementation BNRItemsViewController
@@ -26,22 +24,21 @@
     {
         UINavigationItem *navItem = self.navigationItem;
         navItem.title = @"Homepwner";
+        
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                             target:self
+                                                                             action:@selector(addNewItem:)];
+        // Set this bar button item as the right item in the navigationItem
+        navItem.rightBarButtonItem = bbi;
+        navItem.leftBarButtonItem = self.editButtonItem;
     }
     return self;
 }
+
+
 - (instancetype)initWithStyle:(UITableViewStyle)style
 {
     return [self init];
-}
-
-- (UIView *)headerView
-{
-    if (!_headerView) {
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderView"
-                                      owner:self
-                                    options:nil];
-    }
-    return _headerView;
 }
 
 
@@ -111,6 +108,8 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
                                         toIndex:destinationIndexPath.row];
 }
 
+
+// The method for going to the detail view
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -147,10 +146,6 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"UITableViewCell"];
     [self.tableView setContentInset:UIEdgeInsetsMake(0,0,0,0)];
-    
-    UIView *header = self.headerView;
-    
-    [self.tableView setTableHeaderView:header];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -159,6 +154,8 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
     
     [self.tableView reloadData];
 }
+
+// OTHER METHODS
 
 - (IBAction)addNewItem:(id)sender
 {

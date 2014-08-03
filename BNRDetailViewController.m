@@ -7,6 +7,7 @@
 //
 
 #import "BNRDetailViewController.h"
+#import "BNRDateViewController.h"
 #import "BNRItem.h"
 
 @interface BNRDetailViewController ()
@@ -56,6 +57,16 @@
     self.item.valueInDollars = [self.valueField.text intValue];
 }
 
+// UITextFieldDelegateMethods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.nameField resignFirstResponder];
+    [self.serialNumberField resignFirstResponder];
+    [self.valueField resignFirstResponder];
+    
+    return YES;
+}
+
 
 // OTHER METHODS
 
@@ -63,6 +74,21 @@
 {
     _item = item;
     self.navigationItem.title = _item.itemName;
+}
+
+- (IBAction)backgroundTap:(id)sender
+{
+    [self.view endEditing:YES];
+}
+
+- (IBAction)changeDate:(id)sender
+{
+    BNRDateViewController *dateViewController = [[BNRDateViewController alloc] init];
+    
+    dateViewController.item = self.item;
+    
+    // Push it onto the top of the navigation controller's stack
+    [self.navigationController pushViewController:dateViewController animated:YES];
 }
 
 @end

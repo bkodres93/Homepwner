@@ -23,7 +23,7 @@
         _serialNumber = sNumber;
         _valueInDollars = value;
         // Set _dateCreated to the current date and time
-        _dateCreated = [[ NSDate alloc] init];
+        _dateCreated = [[NSDate alloc] init];
     }
     // Return the address of the newly initialized object
     return self;
