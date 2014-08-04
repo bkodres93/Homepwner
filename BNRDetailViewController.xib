@@ -7,8 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BNRDetailViewController">
             <connections>
                 <outlet property="dateLabel" destination="dmC-x9-FIU" id="L4L-zL-vQU"/>
+                <outlet property="imageView" destination="HeW-cP-zFH" id="YK8-nn-XHF"/>
                 <outlet property="nameField" destination="ZbL-bN-7VV" id="tsc-f4-E1z"/>
                 <outlet property="serialNumberField" destination="Ubo-p6-2Ii" id="Wca-Sf-AYz"/>
+                <outlet property="toolbar" destination="Mn2-Y0-l5p" id="nrb-zO-dIQ"/>
                 <outlet property="valueField" destination="GVu-EF-6Cz" id="y7s-Zq-nIW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -65,19 +67,34 @@
                     </connections>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmC-x9-FIU">
-                    <rect key="frame" x="20" y="183" width="280" height="21"/>
+                    <rect key="frame" x="20" y="178" width="280" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIB-mW-grO">
-                    <rect key="frame" x="115" y="212" width="90" height="30"/>
+                    <rect key="frame" x="115" y="197" width="90" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Change Date"/>
                     <connections>
                         <action selector="changeDate:" destination="-1" eventType="touchUpInside" id="ZTr-qr-uGH"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HeW-cP-zFH">
+                    <rect key="frame" x="28" y="235" width="265" height="265"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mn2-Y0-l5p">
+                    <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <items>
+                        <barButtonItem systemItem="camera" id="ntA-eA-yCA">
+                            <connections>
+                                <action selector="takePicture:" destination="-1" id="unm-wO-2eF"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>

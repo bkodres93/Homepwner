@@ -10,11 +10,14 @@
 #import "BNRDateViewController.h"
 #import "BNRItem.h"
 
-@interface BNRDetailViewController ()
+@interface BNRDetailViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *serialNumberField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end
 
@@ -76,6 +79,8 @@
     self.navigationItem.title = _item.itemName;
 }
 
+// ACTIONS
+
 - (IBAction)backgroundTap:(id)sender
 {
     [self.view endEditing:YES];
@@ -89,6 +94,35 @@
     
     // Push it onto the top of the navigation controller's stack
     [self.navigationController pushViewController:dateViewController animated:YES];
+}
+
+
+// IMAGE METHODS
+
+- (IBAction)takePicture:(id)sender
+{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    imagePicker.delegate = self;
+    
+    [self presentViewController:imagePicker animated:YES completion:NULL];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
+    self.imageView.image = image;
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end
