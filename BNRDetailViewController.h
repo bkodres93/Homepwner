@@ -14,7 +14,6 @@
 
 @property (nonatomic, strong) BNRItem *item;
 
-- (IBAction)backgroundTap:(id)sender;
 - (IBAction)changeDate:(id)sender;
 
 @end
