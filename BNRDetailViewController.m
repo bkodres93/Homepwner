@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 
 @end
 
@@ -26,9 +27,56 @@
 
 #pragma mark - VIEW METHODS
 
+//renamed so that it does not get called!
+- (void)viewDidLoad3
+{
+    [super viewDidLoad];
+    
+    UIImageView *iv = [[UIImageView alloc] initWithImage:nil];
+    
+    // content fit was ascpect fit in XIB
+    iv.contentMode = UIViewContentModeScaleAspectFit;
+    
+    // do not produce a translated constraint for this view
+    iv.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    // add the image view to this view
+    [self.view addSubview:iv];
+    // save it in a global variable
+    self.imageView = iv;
+    /*
+    NSDictionary *nameMap = @{@"imageView" : self.imageView,
+                              @"dateLabel" : self.dateLabel,
+                              @"toolbar" : self.toolbar};
+    
+    // imageView is 0 pts from super view on left and right
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[imageView]-0-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:nameMap];
+    
+    
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[dateLabel]-[imageView]-[toolbar]-|"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:nameMap];
+     */
+    
+    /*
+    [self.view addConstraints:horizontalConstraints];
+    [self.view addConstraints:verticalConstraints];
+     */
+
+}
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    
+    // prepare for different orientation right away
+    UIInterfaceOrientation io = [[UIApplication sharedApplication] statusBarOrientation];
+    [self prepareViewsForOrientation:io];
     
     BNRItem *item = self.item;
     self.nameField.text = item.itemName;
@@ -63,6 +111,37 @@
     self.item.itemName = self.nameField.text;
     self.item.serialNumber = self.serialNumberField.text;
     self.item.valueInDollars = [self.valueField.text intValue];
+}
+
+
+//right before it rotates
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                         duration:(NSTimeInterval)duration
+{
+    [self prepareViewsForOrientation:toInterfaceOrientation];
+}
+
+
+// prepare the views
+- (void)prepareViewsForOrientation:(UIInterfaceOrientation)orientation
+{
+    // if we are an ipad do nothing
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        return;
+    }
+    
+    // otherwise we test for landscape
+    if (UIInterfaceOrientationIsLandscape(orientation))
+    {
+        self.imageView.hidden = YES;
+        self.cameraButton.enabled = NO;
+    }
+    else
+    {
+        self.imageView.hidden = NO;
+        self.cameraButton.enabled = YES;
+    }
 }
 
 
