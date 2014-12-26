@@ -10,9 +10,12 @@
 #import "BNRDateViewController.h"
 #import "BNRItem.h"
 #import "BNRImageStore.h"
+#import "BNRItemStore.h"
+#import "BNRPopoverBackground.h"
 
-@interface BNRDetailViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+@interface BNRDetailViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverControllerDelegate>
 
+@property (strong, nonatomic) UIPopoverController *imagePickerPopover;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *serialNumberField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
@@ -67,6 +70,50 @@
     [self.view addConstraints:verticalConstraints];
      */
 
+}
+
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil
+                         bundle:(NSBundle *)nibBundleOrNil
+{
+    [NSException raise:@"Wrong initializer" format:@"Use initForNewItem:"];
+    return nil;
+}
+
+
+- (instancetype)initForNewItem:(BOOL)isNew
+{
+    self = [super initWithNibName:nil bundle:nil];
+    
+    if (self)
+    {
+        if (isNew)
+        {
+            UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                      target:self
+                                                                                      action:@selector(save:)];
+            UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                      target:self
+                                                                                      action:@selector(cancel:)];
+            self.navigationItem.rightBarButtonItem = doneItem;
+            self.navigationItem.leftBarButtonItem = cancelItem;
+        }
+    }
+    return self;
+}
+
+
+// Notice these selector methods are the same but cancel deletes an item from the store
+- (void)save:(id)sender
+{
+    [self.presentingViewController dismissViewControllerAnimated:NO completion:self.dismissBlock];
+}
+
+
+- (void)cancel:(id)sender
+{
+    [[BNRItemStore sharedStore] removeItem:self.item];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 
 
@@ -186,10 +233,12 @@
 {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
-    else {
+    else
+    {
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     
@@ -197,13 +246,38 @@
     
     imagePicker.delegate = self;
     
-    [self presentViewController:imagePicker animated:YES completion:NULL];
+    // if ipad, display the popover
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        self.imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+        
+        self.imagePickerPopover.delegate = self;
+        self.imagePickerPopover.popoverBackgroundViewClass = [BNRPopoverBackground class];
+
+        
+        [self.imagePickerPopover presentPopoverFromBarButtonItem:sender
+                                        permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                        animated:YES];
+    }
+    else
+    {
+        [self presentViewController:imagePicker animated:YES completion:NULL];
+    }
 }
 
 - (IBAction)clearImage:(id)sender
 {
     [[BNRImageStore sharedStore] deleteImageForKey:self.item.itemKey];
     self.imageView.image = nil;
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        [self popoverControllerDidDismissPopover:self.imagePickerPopover];
+    }
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker
@@ -221,7 +295,22 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     self.imageView.image = image;
     
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    // we want to dismiss the popover if there is one
+    if (self.imagePickerPopover)
+    {
+        [self.imagePickerPopover dismissPopoverAnimated:YES];
+        self.imagePickerPopover = nil;
+    }
+    else
+    {
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    NSLog(@"Popover dismissed.");
+    self.imagePickerPopover = nil;
 }
 
 @end

@@ -13,7 +13,10 @@
 @interface BNRDetailViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, strong) BNRItem *item;
+@property (nonatomic, copy) void (^dismissBlock)(void);
+
 
 - (IBAction)changeDate:(id)sender;
+- (instancetype)initForNewItem:(BOOL)isNew;
 
 @end

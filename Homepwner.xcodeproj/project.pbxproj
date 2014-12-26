@@ -24,6 +24,7 @@
 		502623761947D2A90044503B /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 502623751947D2A90044503B /* BNRItemStore.m */; };
 		5049EF76198EEEF2005F2745 /* BNRDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5049EF74198EEEF2005F2745 /* BNRDateViewController.m */; };
 		5049EF77198EEEF2005F2745 /* BNRDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5049EF75198EEEF2005F2745 /* BNRDateViewController.xib */; };
+		507A0C551A4DD903002E39BC /* BNRPopoverBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 507A0C541A4DD903002E39BC /* BNRPopoverBackground.m */; };
 		50BAC80F1993EEC500052C80 /* BNRImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BAC80E1993EEC500052C80 /* BNRImageStore.m */; };
 		50E620DB198B4B330072F083 /* BNRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E620D9198B4B330072F083 /* BNRDetailViewController.m */; };
 		50E620DC198B4B330072F083 /* BNRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50E620DA198B4B330072F083 /* BNRDetailViewController.xib */; };
@@ -65,6 +66,8 @@
 		5049EF73198EEEF2005F2745 /* BNRDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDateViewController.h; sourceTree = "<group>"; };
 		5049EF74198EEEF2005F2745 /* BNRDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDateViewController.m; sourceTree = "<group>"; };
 		5049EF75198EEEF2005F2745 /* BNRDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BNRDateViewController.xib; sourceTree = "<group>"; };
+		507A0C531A4DD903002E39BC /* BNRPopoverBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRPopoverBackground.h; sourceTree = "<group>"; };
+		507A0C541A4DD903002E39BC /* BNRPopoverBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRPopoverBackground.m; sourceTree = "<group>"; };
 		50BAC80D1993EEC500052C80 /* BNRImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRImageStore.h; sourceTree = "<group>"; };
 		50BAC80E1993EEC500052C80 /* BNRImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRImageStore.m; sourceTree = "<group>"; };
 		50E620D8198B4B330072F083 /* BNRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDetailViewController.h; sourceTree = "<group>"; };
@@ -99,10 +102,12 @@
 		502623331947CDAA0044503B = {
 			isa = PBXGroup;
 			children = (
+				507A0C531A4DD903002E39BC /* BNRPopoverBackground.h */,
+				507A0C541A4DD903002E39BC /* BNRPopoverBackground.m */,
 				502623711947D2300044503B /* BNRItem.h */,
+				502623721947D2300044503B /* BNRItem.m */,
 				50BAC80D1993EEC500052C80 /* BNRImageStore.h */,
 				50BAC80E1993EEC500052C80 /* BNRImageStore.m */,
-				502623721947D2300044503B /* BNRItem.m */,
 				502623741947D2A90044503B /* BNRItemStore.h */,
 				502623751947D2A90044503B /* BNRItemStore.m */,
 				5026236E1947CEB60044503B /* BNRItemsViewController.h */,
@@ -278,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				507A0C551A4DD903002E39BC /* BNRPopoverBackground.m in Sources */,
 				5049EF76198EEEF2005F2745 /* BNRDateViewController.m in Sources */,
 				50E620DB198B4B330072F083 /* BNRDetailViewController.m in Sources */,
 				502623761947D2A90044503B /* BNRItemStore.m in Sources */,
@@ -402,6 +408,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Homepwner/Homepwner-Prefix.pch";
 				INFOPLIST_FILE = "Homepwner/Homepwner-Info.plist";
@@ -417,6 +424,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Homepwner/Homepwner-Prefix.pch";
 				INFOPLIST_FILE = "Homepwner/Homepwner-Info.plist";

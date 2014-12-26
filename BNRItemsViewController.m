@@ -42,6 +42,26 @@
 }
 
 
+
+// OVERRIDDEN VIEW METHODS
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self.tableView registerClass:[UITableViewCell class]
+           forCellReuseIdentifier:@"UITableViewCell"];
+    [self.tableView setContentInset:UIEdgeInsetsMake(0,0,0,0)];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    
+    [self.tableView reloadData];
+}
+
+
 // TABLE VIEW METHODS
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -73,9 +93,11 @@
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
  forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) { 
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
         NSArray *items = [[BNRItemStore sharedStore] allItems];
-        if (items.count != indexPath.row) {
+        if (items.count != indexPath.row)
+        {
             BNRItem *item = items[indexPath.row];
             [[BNRItemStore sharedStore] removeItem:item];
         
@@ -114,7 +136,7 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row != [[[BNRItemStore sharedStore] allItems] count]) {
-        BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] init];
+        BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] initForNewItem:NO];
         
         // Get the items and give the detail view-controller the selected item
         NSArray *items = [[BNRItemStore sharedStore] allItems];
@@ -136,39 +158,24 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 }
 
 
-
-// OVERRIDDEN VIEW METHODS
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [self.tableView registerClass:[UITableViewCell class]
-           forCellReuseIdentifier:@"UITableViewCell"];
-    [self.tableView setContentInset:UIEdgeInsetsMake(0,0,0,0)];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-    
-    [self.tableView reloadData];
-}
-
 // OTHER METHODS
 
 - (IBAction)addNewItem:(id)sender
 {
     BNRItem *newItem = [[BNRItemStore sharedStore] createItem];
     
-    NSInteger lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
+    // create a detail view controller in a modal
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] initForNewItem:YES];
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    detailViewController.item = newItem;
+    detailViewController.dismissBlock = ^{
+        [self.tableView reloadData];
+    };
     
-    [self.tableView insertRowsAtIndexPaths:@[indexPath]
-                          withRowAnimation:UITableViewRowAnimationLeft];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
     
-    
+    [self presentViewController:navController animated:YES completion:NULL];
 }
 
 - (IBAction)toggleEditingMode:(id)sender
